@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export function Form() {
-    const [team, setTeam] = useState([{name: 'one', email: '1', role: 'first'}, {name: 'two', email: '2', role: 'second'}]);
+    const [team, setTeam] = useState([{name: 'Virginia', email: 'vt@gmail.com', role: 'student'}, {name: 'Elaine', email: 'el@yahoo.com', role: 'developer'}]);
     const [member, setMember] = useState({ name: '', email: '', role: ''});
 
     function handleChange(event) {
@@ -17,13 +17,30 @@ export function Form() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        // const updatedTeam = team.push(member);
         setTeam([...team, member]);
         console.log("team: ", team);
     }
 
     return (
         <div>
+
+<div className="memberList">
+                <h2>List of Members</h2>
+                <div>
+                {team.map((member) => {
+                    console.log('render element for ', member);
+                    return (
+                        <div key={member.name}>
+                        <p>Name: {member.name}</p>
+                        <p>Email: {member.email}</p>
+                        <p>Role: {member.role}</p>
+                        <br />
+                        </div>
+                    )
+                })}
+                </div>
+            </div>
+
             <form onSubmit={event => handleSubmit(event)}>
                 <label>
                     Name:
@@ -31,7 +48,7 @@ export function Form() {
                         type="text"
                         id="name"
                         name="name"
-                        placeholder="name of you"
+                        placeholder="Name"
                         onChange={handleChange}
                     />
                 </label>
@@ -39,10 +56,10 @@ export function Form() {
                 <label>
                     Email:
           <input
-                        type="text"
+                        type="email"
                         id="email"
                         name="email"
-                        placeholder="email of you"
+                        placeholder="Email address"
                         onChange={handleChange}
                     />
                 </label>
@@ -53,29 +70,14 @@ export function Form() {
                         type="text"
                         id="role"
                         name="role"
-                        placeholder="role of you"
+                        placeholder="Role"
                         onChange={handleChange}
                     />
                 </label>
                 <br />
-                <button>Submit!</button>
+                <button>Add new member</button>
             </form>
 
-            <div className="memberList">
-                <h2>List of Members</h2>
-                <div>
-                {team.map((member) => {
-                    console.log('render element for ', member);
-                    return (
-                        <div key={member.name}>
-                        <p>Name: {member.name}</p>
-                        <p>Email: {member.email}</p>
-                        <p>Role: {member.role}</p>
-                        </div>
-                    )
-                })}
-                </div>
-            </div>
         </div>
     );
 }
