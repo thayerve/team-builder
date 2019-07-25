@@ -19,6 +19,7 @@ export function Form() {
         event.preventDefault();
         setTeam([...team, member]);
         console.log("team: ", team);
+        setMember({ name: '', email: '', role: ''});
     }
 
     return (
@@ -49,6 +50,7 @@ export function Form() {
                         id="name"
                         name="name"
                         placeholder="Name"
+                        value={member.name}
                         onChange={handleChange}
                     />
                 </label>
@@ -60,6 +62,7 @@ export function Form() {
                         id="email"
                         name="email"
                         placeholder="Email address"
+                        value={member.email}
                         onChange={handleChange}
                     />
                 </label>
@@ -71,6 +74,7 @@ export function Form() {
                         id="role"
                         name="role"
                         placeholder="Role"
+                        value={member.role}
                         onChange={handleChange}
                     />
                 </label>
