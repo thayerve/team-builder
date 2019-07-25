@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 export function Form() {
-    const [team, setTeam] = useState([]);
-    const [member, setMember] = useState({ name: '', email: '', role: '' });
+    const [team, setTeam] = useState([{name: 'one', email: '1', role: 'first'}, {name: 'two', email: '2', role: 'second'}]);
+    const [member, setMember] = useState({ name: '', email: '', role: ''});
 
     function handleChange(event) {
         const updatedMember = { ...member, [event.target.name]: event.target.value };
@@ -17,8 +17,8 @@ export function Form() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        team.push(member);
-        setTeam(team);
+        // const updatedTeam = team.push(member);
+        setTeam([...team, member]);
         console.log("team: ", team);
     }
 
@@ -57,27 +57,26 @@ export function Form() {
                         onChange={handleChange}
                     />
                 </label>
-
+                <br />
                 <button>Submit!</button>
             </form>
 
             <div className="memberList">
-                <h2> List of Members</h2>
+                <h2>List of Members</h2>
                 <div>
                 {team.map((member) => {
                     console.log('render element for ', member);
                     return (
                         <div key={member.name}>
-                        <p>Name: {member.name} 
-                            Email: {member.email} 
-                            Role: {member.role}</p>
+                        <p>Name: {member.name}</p>
+                        <p>Email: {member.email}</p>
+                        <p>Role: {member.role}</p>
                         </div>
                     )
                 })}
                 </div>
             </div>
         </div>
-
     );
 }
 
